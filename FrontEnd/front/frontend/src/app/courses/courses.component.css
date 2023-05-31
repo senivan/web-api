@@ -34,7 +34,7 @@
 }
 
 button.card-btn {
-    background-color: #837ddc;
+    background-color: blueviolet;
     position: absolute;
     right: 20px;
     margin-bottom: 10px;
@@ -53,7 +53,7 @@ mat-sidenav{
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 2px;
-    color: #6762ae;
+    color: blueviolet;
 }
 
 .example-container {

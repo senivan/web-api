@@ -26,8 +26,8 @@ namespace Compass.Infrastructure.Initializer
                         UserName = "admin@email.com",
                         Email = "admin@email.com",
                         EmailConfirmed = true,
-                        Name = "Admin name",
-                        Surname = "Admin surname",
+                        Name = "Admin",
+                        Surname = "Admin",
                         PhoneNumber = "+xx(xxx)xx-xx-xxx",
                         PhoneNumberConfirmed = true,
                     };
@@ -37,8 +37,8 @@ namespace Compass.Infrastructure.Initializer
                         UserName = "teacher@email.com",
                         Email = "teacher@email.com",
                         EmailConfirmed = true,
-                        Name = "User name",
-                        Surname = "User surname",
+                        Name = "User",
+                        Surname = "User",
                         PhoneNumber = "+xx(xxx)xx-xx-xxx",
                         PhoneNumberConfirmed = true,
                     };
@@ -58,8 +58,8 @@ namespace Compass.Infrastructure.Initializer
 
                     await _context.SaveChangesAsync();
 
-                    IdentityResult resultAdmin = userManager.CreateAsync(admin, "Qwerty-1").Result;
-                    IdentityResult resultUser = userManager.CreateAsync(user, "Qwerty-1").Result;
+                    IdentityResult resultAdmin = userManager.CreateAsync(admin, "Qwerty-123").Result;
+                    IdentityResult resultUser = userManager.CreateAsync(user, "Qwerty-123").Result;
 
                     if (resultAdmin.Succeeded)
                     {

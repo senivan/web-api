@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Compass.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230414153224_Add category entity")]
-    partial class Addcategoryentity
+    [Migration("20230531155935_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -46,6 +46,105 @@ namespace Compass.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "",
+                            Name = "Programming"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "",
+                            Name = "UI/UX"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "",
+                            Name = "FrontEnd"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "",
+                            Name = "System programming"
+                        });
+                });
+
+            modelBuilder.Entity("Compass.Core.Entities.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("Course");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "Description C++ Basics",
+                            ImagePath = "https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png",
+                            Price = 900.0m,
+                            Title = "C++ Basics"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            Description = "Description C++ Advanced",
+                            ImagePath = "https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png",
+                            Price = 910.0m,
+                            Title = "C++ Advanced"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 2,
+                            Description = "Description Figma",
+                            ImagePath = "https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png",
+                            Price = 1500.0m,
+                            Title = "Figma"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 3,
+                            Description = "Description HTML/CSS/JavaScript",
+                            ImagePath = "https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png",
+                            Price = 1850.0m,
+                            Title = "HTML/CSS/JavaScript"
+                        });
                 });
 
             modelBuilder.Entity("Compass.Core.Entities.RefreshToken", b =>
@@ -306,6 +405,17 @@ namespace Compass.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
+                });
+
+            modelBuilder.Entity("Compass.Core.Entities.Course", b =>
+                {
+                    b.HasOne("Compass.Core.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Compass.Core.Entities.RefreshToken", b =>

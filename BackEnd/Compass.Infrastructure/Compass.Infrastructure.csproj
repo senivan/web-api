@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Compass.Core\Compass.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
